@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<PetWeb.Data.CustomUser> SignInManager
+@inject UserManager<PetWeb.Data.CustomUser> UserManager
+
+    <div class="dropdown mr-5">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a id="dropdownMenuLink"class="nav-link text-dark font-weight-bold dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name!</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-area="" asp-controller="Posts" asp-action="">Your Posts</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Log Out</a>
+            </div>
+           
+        }
+        else
+        {
+            <li class="nav-item ml-5">
+                <a class="nav-item nav-link btn btn-warning text-white mx-2" id="btn-adoptt" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link btn btn-danger text-white mx-2" id="btn-facc" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+            </li>
+        }
+    </div>
